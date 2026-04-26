@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Náhodný profil</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>{{title}}</h1>
+        <div class="profile">
+            <div class="photo">
+                <img id="profilePhoto" src="{{photo}}" alt="Fotka profilu">
+            </div>
+            <div class="info">
+                <p><strong>Jméno:</strong> {{name}}</p>
+                <p><strong>Datum narození:</strong> {{dob}}</p>
+                <p><strong>Věk:</strong> {{age}} let</p>
+                <p><strong>Pohlaví:</strong> {{gender}}</p>
+                <p><strong>Bydliště:</strong> {{residence}}</p>
+                <p><strong>Text o uživateli:</strong> {{about}}</p>
+                <p><strong>Typ osobnosti:</strong> {{personality}}</p>
+                <p><strong>Pohlaví ke kterému je přitahován:</strong> {{attracted_to}}</p>
+                <p><strong>Submisivita/Dominance:</strong> {{sub_dom}}/10</p>
+                <div id="contact" style="display: none;">
+                    <p><strong>Tel. číslo:</strong> {{phone}}</p>
+                    <p><strong>Email:</strong> {{email}}</p>
+                </div>
+            </div>
+        </div>
+        <div class="buttons">
+            <button id="revealContact">Ukázat kontakt</button>
+            <button id="nextProfile">Další profil</button>
+        </div>
+    </div>
+
+    <!-- Filter Button -->
+    <button id="filterBtn" class="filter-btn">🔍 Filtrovat</button>
+
+    <!-- Filter Modal -->
+    <div id="filterModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Filtrovat profily</h2>
+            <form id="filterForm" action="/profile" method="get">
+                <label for="filter_gender">Pohlaví:</label>
+                <select id="filter_gender" name="gender">
+                    <option value="">Všechna</option>
+                    <option value="muž">Muž</option>
+                    <option value="žena">Žena</option>
+                    <option value="jiné">Jiné</option>
+                </select>
+
+                <label for="filter_personality">Typ osobnosti:</label>
+                <select id="filter_personality" name="personality">
+                    <option value="">Všechny</option>
+                    <option value="choleric">Cholerik</option>
+                    <option value="sanguine">Sangvinik</option>
+                    <option value="phlegmatic">Flegmatik</option>
+                    <option value="melancholic">Melancholik</option>
+                </select>
+
+                <label for="filter_attracted_to">Přitahován k:</label>
+                <select id="filter_attracted_to" name="attracted_to">
+                    <option value="">Všem</option>
+                    <option value="muž">Muž</option>
+                    <option value="žena">Žena</option>
+                    <option value="oba">Oba</option>
+                    <option value="jiné">Jiné</option>
+                </select>
+
+                <label for="filter_min_age">Minimální věk:</label>
+                <input type="number" id="filter_min_age" name="min_age" min="18" max="100">
+
+                <label for="filter_max_age">Maximální věk:</label>
+                <input type="number" id="filter_max_age" name="max_age" min="18" max="100">
+
+                <button type="submit">Aplikovat filtry</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Modal functionality
+        const modal = document.getElementById('filterModal');
+        const btn = document.getElementById('filterBtn');
+        const span = document.getElementsByClassName('close')[0];
+
+        btn.onclick = function() {
+            modal.style.display = 'block';
+        }
+
+        span.onclick = function() {
+            modal.style.display = 'none';
+        }
+
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
+
+        document.getElementById('revealContact').addEventListener('click', function() {
+            document.getElementById('contact').style.display = 'block';
+            this.style.display = 'none';
+        });
+
+        document.getElementById('nextProfile').addEventListener('click', function() {
+            // Preserve current filters
+            const urlParams = new URLSearchParams(window.location.search);
+            window.location.href = '/profile?' + urlParams.toString();
+        });
+    </script>
+</body>
+</html>

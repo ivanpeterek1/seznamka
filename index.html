@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Osobní údaje</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Vyplňte své osobní údaje</h1>
+        <form id="userForm" enctype="multipart/form-data" action="/submit" method="post">
+            <label for="name">Jméno:</label>
+            <input type="text" id="name" name="name" required>
+
+            <label for="dob">Datum narození:</label>
+            <input type="date" id="dob" name="dob" required>
+
+            <label for="gender">Pohlaví:</label>
+            <select id="gender" name="gender" required>
+                <option value="">Vyberte</option>
+                <option value="muž">Muž</option>
+                <option value="žena">Žena</option>
+                <option value="jiné">Jiné</option>
+            </select>
+
+            <label for="residence">Bydliště:</label>
+            <input type="text" id="residence" name="residence" required>
+
+            <label for="about">Text o uživateli:</label>
+            <textarea id="about" name="about" rows="4" required></textarea>
+
+            <label for="phone">Tel. číslo:</label>
+            <input type="tel" id="phone" name="phone" required>
+
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+
+            <label for="personality">Typ osobnosti:</label>
+            <select id="personality" name="personality" required>
+                <option value="">Vyberte</option>
+                <option value="choleric">Cholerik</option>
+                <option value="sanguine">Sangvinik</option>
+                <option value="phlegmatic">Flegmatik</option>
+                <option value="melancholic">Melancholik</option>
+            </select>
+
+            <label for="attracted_to">Pohlaví ke kterému jste přitahován:</label>
+            <select id="attracted_to" name="attracted_to" required>
+                <option value="">Vyberte</option>
+                <option value="muž">Muž</option>
+                <option value="žena">Žena</option>
+                <option value="oba">Oba</option>
+                <option value="jiné">Jiné</option>
+            </select>
+
+            <label for="sub_dom">Submisivita/Dominance (0-10):</label>
+            <input type="range" id="sub_dom" name="sub_dom" min="0" max="10" value="5" required>
+            <span id="sub_dom_value">5</span>
+
+            <label for="photo">Fotka:</label>
+            <input type="file" id="photo" name="photo" accept="image/*" required>
+
+            <button type="submit">Odeslat</button>
+        </form>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
